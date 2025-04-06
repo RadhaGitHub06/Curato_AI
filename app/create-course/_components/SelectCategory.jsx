@@ -22,7 +22,7 @@ function SelectCategory() {
           <div
             key={index}
             className={`flex flex-col items-center p-5 border rounded-xl 
-                        hover:border-primary hover:bg-[#618ebe] cursor-pointer
+                        hover:border-primary hover:bg-red-300 cursor-pointer
                         transition duration-300 ease-in-out 
                         ${userCourseInput?.category === item.name ? 'border-primary bg-[#618ebe]' : ''}`}
             onClick={() => handleCategoryChange(item.name)}

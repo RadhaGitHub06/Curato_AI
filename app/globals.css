@@ -139,3 +139,51 @@
   animation: float-up-down 5s ease-in-out infinite;
 }
 /* Set default text color to white */
+/* global.css */
+@keyframes honeycombMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 300px 300px;
+  }
+}
+
+.honeycomb-background {
+  background-image: radial-gradient(circle at 1px 1px, #ffffff0a 1px, transparent 0);
+  background-size: 30px 30px;
+  animation: honeycombMove 30s linear infinite;
+}
+
+/* global.css */
+@keyframes honeycombMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 300px 300px;
+  }
+}
+
+
+/* Large square grid pattern */
+.pattern-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Radial gradient: light gray in center, black at edges */
+.bg-gradient-radial {
+  background: radial-gradient(circle at center, rgba(150, 150, 150, 0.15), rgba(0, 0, 0, 0.95));
+}
+.bg-grid {
+  background-color: #0d0d0d;
+  background-image: 
+    linear-gradient(0deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+

@@ -1,28 +1,26 @@
-// import { json, pgSchema, serial, varchar } from "drizzle-orm/pg-core";
 
-// // Define schema with `pgSchema` for compatibility
-// export const courseList = pgSchema('courseList').table('courses', {
-//     id: serial('id').primaryKey(),
-//     courseId: varchar('courseId').notNull(),
-//     name: varchar('name').notNull(),
-//     category: varchar('category').notNull(),
-//     level: varchar('level').notNull(),
-//     courseOutput: json('courseOutput').default({}),   // Safer default JSON
-//     createdBy: varchar('createdBy').notNull(),
-//     userName: varchar('userName'),
-//     userProfileImage: varchar('userProfileImage')
-// });
-import { json, pgSchema, serial, varchar } from "drizzle-orm/pg-core";
+import { json, serial, varchar, pgTable , boolean, integer } from "drizzle-orm/pg-core";
 
-// Define schema with `pgSchema` for compatibility
-export const courseList = pgSchema('courseList').table('courses', {
+export const courseList = pgTable('courses', {
     id: serial('id').primaryKey(),
     courseId: varchar('courseId').notNull(),
     name: varchar('name').notNull(),
     category: varchar('category').notNull(),
     level: varchar('level').notNull(),
+    includeVideo:varchar('includeVideo').notNull().default('yes'),
     courseOutput: json('courseOutput').default({}),   // Safer default JSON
     createdBy: varchar('createdBy').notNull(),
     userName: varchar('userName'),
-    userProfileImage: varchar('userProfileImage')
+    userProfileImage: varchar('userProfileImage'),
+    courseBanner:varchar('courseBanner').default('/uploaded.svg'),
+    publish: boolean('publish').default(false) 
 });
+
+export const Chapters=pgTable('chapters',{
+    id:serial('id').primaryKey(),
+    courseId: varchar('courseId').notNull(),
+    chapterId: integer('chapterId').notNull(),
+    content: json('content').notNull(),
+    VideoId: varchar('VideoId').notNull()
+   
+})

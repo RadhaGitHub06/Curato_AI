@@ -1,34 +1,33 @@
-import React from 'react'
-import { AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
+import React from 'react';
+import { 
+    AlertDialog,
     AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
     AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
- } from '../../../Components/ui/alert-dialog'
- import Image from 'next/image'
+    AlertDialogTitle
+} from '../../../Components/ui/alert-dialog';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';  // Import for accessibility
+import Image from 'next/image';
 
-function LoadingDialog({loading}) {
-  return (
-<AlertDialog open={loading}>
- <AlertDialogTitle></AlertDialogTitle>
-  <AlertDialogContent className="bg-white text-black">
-    <AlertDialogHeader>
-     
-      <AlertDialogDescription>
-<div className='flex flex-col items-center py-10'>
-       <Image src={'/loading.gif'} width={170} height={80} alt="load"/>
-          <h2 className='text-xl'>Please Wait..Ai Working on your Course</h2>
-  </div>    </AlertDialogDescription>
-    </AlertDialogHeader>
-  
-  </AlertDialogContent>
-</AlertDialog>
+function LoadingDialog({ loading }) {
+    if (!loading) return null;  // Prevent rendering when not loading
 
-  )
+    return (
+        <AlertDialog open={loading}>
+            <AlertDialogContent className="bg-white text-black">
+                <AlertDialogHeader>
+                    {/* Visually hidden title for screen readers */}
+                    <VisuallyHidden>
+                        <AlertDialogTitle>Loading...</AlertDialogTitle>
+                    </VisuallyHidden>
+                    
+                    <div className='flex flex-col items-center py-10'>
+                        <Image src={'/loading.gif'} width={170} height={80} alt="Loading..." />
+                        <h2 className='text-xl mt-4'>Please wait... AI is working on your course</h2>
+                    </div>  
+                </AlertDialogHeader>
+            </AlertDialogContent>
+        </AlertDialog>
+    );
 }
 
-export default LoadingDialog
+export default LoadingDialog;

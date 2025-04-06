@@ -8,6 +8,14 @@ import SelectOption from './_components/SelectOption'
 import { UserInputContext } from '../_context/UserInputContext'
 import { GenerateCourseLayout_Ai } from '../../configs/AiModel'
 import LoadingDialog from './_components/LoadingDialog'
+import { courseList } from '../../configs/schema'
+import uuid4 from 'uuid4'
+import { useUser } from '@clerk/nextjs'
+import db from '../../configs/db'
+import { useRouter } from 'next/navigation'
+
+
+
 
 function Createcourse() {
     const StepperOptions=[
@@ -31,7 +39,9 @@ function Createcourse() {
       const { userCourseInput, setUserCourseInput } = useContext(UserInputContext);
      const [loading,setLoading]=useState(false);
       const[activeindex,setactiveindex]=useState(0);
- 
+ const {user}=useUser();
+ const router=useRouter();
+
     useEffect(()=>{
   console.log(userCourseInput);
  },[userCourseInput])
@@ -59,8 +69,37 @@ console.log(FINAL_PROMPT);
 const result=await GenerateCourseLayout_Ai.sendMessage(FINAL_PROMPT);
   console.log(result.response?.text());
   console.log(JSON.parse(result.response?.text()));
-  setLoading(false)
+  setLoading(false);
+  SaveCourseLayoutInDb(JSON.parse(result.response?.text()));
  }
+
+
+
+const SaveCourseLayoutInDb = async (courseLayout) => {
+    const id = uuid4();
+    setLoading(true);
+    
+    try {
+        const result = await db.insert(courseList).values({
+            courseId: id,
+            name: userCourseInput?.topic,
+            level: userCourseInput?.level,
+            category: userCourseInput?.category,
+            courseOutput: courseLayout,
+            createdBy: user?.primaryEmailAddress?.emailAddress,
+            userName: user?.fullName,
+            userProfileImage: user?.imageUrl
+        });
+
+        console.log("Data inserted:", result);
+       
+    } catch (error) {
+        console.error("Error inserting data:", error);
+    } finally {
+        setLoading(false);
+        router.replace('/create-course/'+id)
+    }
+};
 
   return (
     <div  className=''>
@@ -70,22 +109,25 @@ const result=await GenerateCourseLayout_Ai.sendMessage(FINAL_PROMPT);
         Create Course
       </h2>
       <div className='flex'>
-{StepperOptions.map((item,index)=>(
-   <div className='flex items-center'>
-    <div className='flex flex-col items-center w-[50px] md:w-[100px]'>
-    <div className={`text-2xl p-2  rounded-full bg-[#618ebe] }>
-    ${activeindex>=index&& 'bg-red-300'}`}>
-        {item.icon}
-        </div >
-        <h2 className='hidden md:block md:text-sm  text-white'>{item.name}</h2>
-    </div>
-  {index!=StepperOptions?.length-1&&
-   <div className={`h-1 w-[50px] md:w-[100px] rounded-full lg:w-[170px] bg-[#618ebe]
-   ${activeindex-1>=index && 'bg-red-300'}`}>
-    </div>}
-    </div>
-))}
-      </div>
+    {StepperOptions.map((item, index) => (
+        <div className='flex items-center' key={item.id}>  {/* Add the unique key here */}
+            <div className='flex flex-col items-center w-[50px] md:w-[100px]'>
+                <div className={`text-2xl p-2 rounded-full bg-[#618ebe] 
+                    ${activeindex >= index && 'bg-red-300'}`}>
+                    {item.icon}
+                </div>
+                <h2 className='hidden md:block md:text-sm text-white'>{item.name}</h2>
+            </div>
+            {index !== StepperOptions.length - 1 && (
+                <div 
+                    className={`h-1 w-[50px] md:w-[100px] rounded-full lg:w-[170px] bg-[#618ebe]
+                    ${activeindex - 1 >= index && 'bg-red-300'}`}>
+                </div>
+            )}
+        </div>
+    ))}
+</div>
+
      </div>
 <div className='px-10 md:px-20 lg:px-44 mt-10'>
      {/* components */}

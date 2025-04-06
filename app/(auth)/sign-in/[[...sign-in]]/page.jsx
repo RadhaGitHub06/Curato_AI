@@ -1,15 +1,18 @@
 import { SignIn } from '@clerk/nextjs';
 import Image from 'next/image';
 import React from 'react';
+import Header from '../../../dashboard/_components/Header';
 
 export default function Page() {
   return (
-    <div className="relative flex min-h-screen bg-gray-900 overflow-hidden">
+    <div>
+      <Header/>
+    <div className="relative flex min-h-screen bg-gray-900 overflow-hidden bg-grid">
 
       {/* Floating Symbols */}
-      <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute inset-0 pointer-events-none">
         {/* Symbol 1 */}
-        <div className="absolute top-16 left-150 text-blue-400 text-3xl animate-float-rtl animate-float-up-down">A</div>
+      <div className="absolute top-16 left-150 text-blue-400 text-3xl animate-float-rtl animate-float-up-down">A</div>
         <div className="absolute top-1/3 left-32 text-purple-300 text-4xl animate-float-rtl animate-float-up-down">D</div>
         <div className="absolute bottom-1/4 left-146 text-yellow-500 text-3xl animate-float-rtl animate-float-up-down">+</div>
         <div className="absolute bottom-12 left-14 text-pink-500 text-5xl animate-float-rtl animate-float-up-down">-</div>
@@ -25,7 +28,7 @@ export default function Page() {
         <div className="absolute top-20 left-82 text-fuchsia-300 text-4xl animate-float-rtl animate-float-up-down">!</div>
         <div className="absolute bottom-1/4 left-36 text-emerald-400 text-3xl animate-float-rtl animate-float-up-down">%</div>
         <div className="absolute bottom-12 left-89 text-blue-500 text-5xl animate-float-rtl animate-float-up-down">5</div>
-      </div>
+      </div> 
 
       {/* Left Side - Image */}
       <div className="hidden lg:flex w-1/2 relative">
@@ -44,6 +47,7 @@ export default function Page() {
         <SignIn />
     </div>
       </div>
+    </div>
     </div>
   );
 }
