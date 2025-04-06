@@ -17,7 +17,7 @@ function Header() {
   <div className="relative z-10 flex justify-between w-full">
     <Image src={'/logo.svg'} width={200} height={200} alt="Logo" />
    <Button className="bg-[#618ebe]" onClick={() => router.push("/dashboard")}>Get started</Button>
-  
+  {/* <change */}
   </div>
 </div>
 

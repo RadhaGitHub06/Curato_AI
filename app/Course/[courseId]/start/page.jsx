@@ -25,9 +25,9 @@ function CourseStart() {
     const result = await db.select().from(courseList)
       .where(eq(courseList?.courseId, params?.courseId));
     setCourse(result[0]);
-    setSelectedChapter(result[0]?.courseOutput?.Course?.Chapters[0]);
-    GetSelectedChapterContent(0);
-    setChapterIndex(0);
+    //setSelectedChapter(result[0]?.courseOutput?.Course?.Chapters[0]);
+    //GetSelectedChapterContent(0);
+    //setChapterIndex(0);
   }
 
   const GetSelectedChapterContent = async (chapterId) => {
@@ -39,7 +39,7 @@ function CourseStart() {
     setChapterContent(result[0]);
   }
   const chapters = course?.courseOutput?.Course?.Chapters;
-  const isLastChapter = chapterIndex === chapters?.length - 1;
+ // const isLastChapter = chapterIndex === chapters?.length - 1;
   const handleGoToDashboard = () => {
     router.push('/dashboard');
   };
@@ -79,9 +79,9 @@ function CourseStart() {
       </div>
 
       {/* Content Section */}
-      <div className='flex-1 md:ml-64'>
+      <div className='flex-1 md:ml-64 '>
         <ChpaterContent chapter={selectedChapter} content={chapterContent} />
-        {isLastChapter && (
+        {/* {isLastChapter && (
           <div className="text-center mt-10 bg-blue-800/40 p-6 rounded-lg shadow-lg border border-blue-300">
             <h1 className="text-3xl font-bold text-white mb-4">🎉 Hurray! You completed the course!</h1>
             <button
@@ -91,7 +91,7 @@ function CourseStart() {
               Go to Dashboard
             </button>
           </div>
-        )}
+        )} */}
       </div>
       
     </div>

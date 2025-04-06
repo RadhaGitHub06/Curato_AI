@@ -111,7 +111,7 @@ function FinishScreen() {
                 Congrats! Your Course is Generated Successfully 🎉
             </h2>
         
-            <CourseBasicInfo course={course} refreshData={() => console.log()} />
+            <CourseBasicInfo course={course} refreshData={() => console.log()} edit={false} />
 
             <h2 className='mt-3 text-center text-[#618ebe]'>Course Url</h2>
             <div className='text-center text-gray-500 flex flex-col sm:flex-row gap-2 sm:gap-5 items-center justify-center rounded-sm shadow-gray-400 shadow-2xs p-3 break-words sm:break-normal overflow-x-auto'>

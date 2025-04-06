@@ -60,8 +60,8 @@ useEffect(()=>{
             <HiOutlinePuzzlePiece className='text-2xl text-[#618ebe]' />
             {course?.category}
           </h1>
-    <Link href={'/Course/'+course?.courseId+"/start"}>
-          <Button className='bg-white text-black w-full'>Start</Button></Link>
+  {!edit&&  <Link href={'/Course/'+course?.courseId+"/start"}>
+          <Button className='bg-white text-black w-full'>Start</Button></Link>}
         </div>
 
         {/* Course Image */}
