@@ -122,7 +122,7 @@ await db.update(courseList).set({
       <LoadingDialog loading={loading} />
 
       {/* Basic Info */}
-      <CourseBasicInfo course={course} refreshData={() => GetCourse()} edit={false}/>
+      <CourseBasicInfo course={course} edit={true} refreshData={() => GetCourse()} />
 
       {/* Course Details */}
       <CourseDetail course={course} />
