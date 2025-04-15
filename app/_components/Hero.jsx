@@ -4,15 +4,23 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import { FileText, Sliders, BookOpen, MessageCircle } from 'lucide-react'
 import { Github, Linkedin, Mail } from 'lucide-react';
+import { HeroParallax } from '../../Components/ui/Hero-parallax'
+import Link from 'next/link'
+import SpotlightCard from '../../Components/ui/cards'
+import Orb from '../../Components/ui/orb'
+import { SparklesCore } from '../../Components/ui/sparkles'
+import Heading from './heading'
 
 function Hero() {
   const router = useRouter()
 
   return (
-    <div>
-      {/* Hero Section */}
-      <section className="bg-black lg:grid lg:h-screen lg:place-content-center">
-        <div className="mx-auto w-screen max-w-screen-xl px-4 py-10 sm:px-6 sm:py-10 md:grid md:grid-cols-2 md:items-center md:gap-4 lg:px-8 lg:py-32">
+    <div className="max-w-full relative mx-auto px-4  sm:px-6 lg:px-8 text-white">
+  
+       <section className=" lg:grid lg:h-screen lg:place-content-center ">
+      
+        <div className="mx-auto w-screen max-w-screen-xl px-4 py-10 sm:px-6 sm:py-10 md:grid md:grid-cols-2 md:items-center md:gap-4 lg:px-8 lg:py-32 ">
+        
           <div className="max-w-prose text-left">
             <h1 className="text-4xl font-bold text-white sm:text-5xl">
               AI-powered
@@ -41,7 +49,11 @@ function Hero() {
             </div>
           </div>
 
-          {/* Image */}
+        
+          <div className='relative w-full max-w-[500px] h-[600px] '>
+          <div className="absolute inset-4 z-0 -mt-8 scale-[1.5]">
+          <Orb />
+        </div> 
           <div className="relative w-[500px] h-[600px]">
             <Image
               src={'/education.svg'}
@@ -51,11 +63,14 @@ function Hero() {
               className="absolute top-0 left-0 w-full h-full filter drop-shadow-[0_0_40px_rgba(97,142,190,0.7)]"
             />
           </div>
-        </div>
-      </section>
+         </div>
+         </div>
+       
+      </section> 
+      
+    <Heading/>  
 
-    {/* Feature Cards Section */}
-<section className="bg-black py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+<section className="bg-black py-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
   {/* Background Square Grid */}
   <div className="absolute inset-0 opacity-5 pointer-events-none" />
 
@@ -63,13 +78,13 @@ function Hero() {
     {[
       {
         icon: <FileText className="w-10 h-10 text-[#618ebe] mb-3" />,
-        title: "5 Free Course Generation ",
+        title: "5 Free Course Generation",
         desc: "Responsive and mobile-first Courses for the web",
       },
       {
         icon: <Sliders className="w-10 h-10 text-[#618ebe] mb-3" />,
         title: "Customizable",
-        desc: " easily customized and extendable",
+        desc: "Easily customized and extendable",
       },
       {
         icon: <BookOpen className="w-10 h-10 text-[#618ebe] mb-3" />,
@@ -80,19 +95,22 @@ function Hero() {
         icon: <MessageCircle className="w-10 h-10 text-[#618ebe] mb-3" />,
         title: "24/7 Support",
         desc: "Contact us 24 hours a day, 7 days a week",
-      }
+      },
     ].map((feature, index) => (
-      <div
+      <SpotlightCard
         key={index}
-        className="text-white text-center p-6 bg-[#111] rounded-lg shadow-md shadow-gray-100 shadow-blue-600 transition-transform transform hover:scale-105 hover:shadow-xl"
+        className="custom-spotlight-card bg-[#111] text-white text-center p-6 rounded-lg shadow-md shadow-blue-600 transition-transform transform hover:scale-105 hover:shadow-xl"
+        spotlightColor="rgba(0, 229, 255, 0.6)"
       >
         <div className="flex justify-center">{feature.icon}</div>
         <h3 className="text-xl font-semibold mt-2">{feature.title}</h3>
         <p className="text-sm mt-2 text-gray-300">{feature.desc}</p>
-      </div>
+      </SpotlightCard>
     ))}
   </div>
 </section>
+
+{/* footer?\ */}
 <footer className="bg-gradient-to-b from-[#0a0a0a] to-black text-white py-12 px-6 border-t border-[#1f1f1f] mt-50">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
          
@@ -145,7 +163,7 @@ function Hero() {
         </div>
         </div>
       </footer>
-    </div>
+      </div>
   )
 }
 

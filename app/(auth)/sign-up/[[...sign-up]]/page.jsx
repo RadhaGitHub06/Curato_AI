@@ -1,38 +1,40 @@
-import { SignedOut, SignUp } from "@clerk/nextjs";
+"use client";
+import { SignUp } from "@clerk/nextjs";
 import Image from "next/image";
-import Header from "../../../dashboard/_components/Header";
 
+import { BackgroundGradient } from "../../../../Components/ui/gradient-card";
+import Aurora from "../../../../Components/ui/Aurorabg";
 export default function Page() {
   return (
-    <div>
-<Header/>
-   
-    <div className="relative flex min-h-screen bg-gray-900 overflow-hidden  bg-grid">
+    <div className="bg-black flex flex-col items-center justify-center">
+   <Aurora
+  colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
+  blend={0.5}
+  amplitude={1.0}
+  speed={2.0}
+/>
+      <Image
+      src={'/logo.svg'}
+      width={300}
+      height={200}
+      alt="logo"
+      className=""
+      />
     
-      <div className="w-full lg:w-1/2 flex items-center justify-center pr-6 z-10">
-        <div className='className=" rounded-lg shadow-[0_10px_30px_rgba(200,200,200,0.8)]   max-w-md"'>
-          <SignUp />
+      <div className="min-h-screen flex items-center justify-center  text-white relative overflow-hidden">
+       
+
+        {/* Right Side - SignUp Form */}
+        <BackgroundGradient className="rounded-[22px] p-2  sm:p-5  dark:bg-zinc-900">
+            <div className="w-full flex justify-center items-center px-2 z-10 rounded-2xl">
+          <div className=" rounded-lg p-2 shadow-2xl max-w-md w-full">
+            <SignUp />
+          </div>
         </div>
-      </div>
-      {/* Floating Symbols */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Symbol 1 */}
+</BackgroundGradient>
+        {/* Background Glow */}
        
       </div>
-
-      {/* Left Side - Image */}
-      <div className="hidden lg:flex w-1/2 relative">
-        <Image
-          src={"/signin.svg"}
-          alt="Side Image"
-          height={600}
-          width={600}
-          className="absolute top-0 left-0 w-full h-full filter drop-shadow-[0_0_40px_rgba(97,142,190,0.7)]"
-        />
-      </div>
-
-      {/* Right Side - Form */}
-    </div>
     </div>
   );
 }
