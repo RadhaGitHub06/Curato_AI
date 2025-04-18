@@ -10,14 +10,28 @@ import SpotlightCard from '../../Components/ui/cards'
 import Orb from '../../Components/ui/orb'
 import { SparklesCore } from '../../Components/ui/sparkles'
 import Heading from './heading'
-
+import Particles from '../../Components/ui/Particles'
+import { Button } from '../../Components/ui/button'
 function Hero() {
   const router = useRouter()
 
   return (
     <div className="max-w-full relative mx-auto px-4  sm:px-6 lg:px-8 text-white">
   
-       <section className=" lg:grid lg:h-screen lg:place-content-center ">
+  <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none'}}>
+    <Particles
+      particleColors={['#ffffff', '#ffffff']}
+      particleCount={1000}
+      particleSpread={10}
+      speed={0.2}
+      particleBaseSize={100}
+      moveParticlesOnHover={false}
+      alphaParticles={false}
+      disableRotation={false}
+    />
+  </div>
+
+       <section className=" lg:grid lg:h-screen lg:place-content-center">
       
         <div className="mx-auto w-screen max-w-screen-xl px-4 py-10 sm:px-6 sm:py-10 md:grid md:grid-cols-2 md:items-center md:gap-4 lg:px-8 lg:py-32 ">
         
@@ -33,12 +47,13 @@ function Hero() {
             </p>
 
             <div className="mt-4 flex gap-4 sm:mt-6">
-              <a
-                className="inline-block rounded border border-[#618ebe] bg-[#618ebe] px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-[#dc9325] cursor-pointer"
-                onClick={() => router.push("/dashboard")}
-              >
-                Get Started
-              </a>
+            <Link
+  href="/dashboard"
+  className="inline-block rounded border border-[#618ebe] bg-[#618ebe] px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-[#dc9325] cursor-pointer"
+>
+  Get Started
+</Link>
+
 
               <a
                 className="inline-block rounded border border-gray-200 px-5 py-3 font-medium text-[#618ebe] shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900"
@@ -70,48 +85,53 @@ function Hero() {
       
     <Heading/>  
 
-<section className="bg-black py-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-  {/* Background Square Grid */}
-  <div className="absolute inset-0 opacity-5 pointer-events-none" />
 
-  <div className="relative max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 z-10">
-    {[
-      {
-        icon: <FileText className="w-10 h-10 text-[#618ebe] mb-3" />,
-        title: "5 Free Course Generation",
-        desc: "Responsive and mobile-first Courses for the web",
-      },
-      {
-        icon: <Sliders className="w-10 h-10 text-[#618ebe] mb-3" />,
-        title: "Customizable",
-        desc: "Easily customized and extendable",
-      },
-      {
-        icon: <BookOpen className="w-10 h-10 text-[#618ebe] mb-3" />,
-        title: "Free to Use",
-        desc: "Every component and plugin is well documented",
-      },
-      {
-        icon: <MessageCircle className="w-10 h-10 text-[#618ebe] mb-3" />,
-        title: "24/7 Support",
-        desc: "Contact us 24 hours a day, 7 days a week",
-      },
-    ].map((feature, index) => (
-      <SpotlightCard
-        key={index}
-        className="custom-spotlight-card bg-[#111] text-white text-center p-6 rounded-lg shadow-md shadow-blue-600 transition-transform transform hover:scale-105 hover:shadow-xl"
-        spotlightColor="rgba(0, 229, 255, 0.6)"
-      >
-        <div className="flex justify-center">{feature.icon}</div>
-        <h3 className="text-xl font-semibold mt-2">{feature.title}</h3>
-        <p className="text-sm mt-2 text-gray-300">{feature.desc}</p>
-      </SpotlightCard>
-    ))}
-  </div>
-</section>
+  {/* Content Section */}
+  <section className=" py-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden mt-[-100px] ">
+    {/* Background Square Grid */}
+    <div className="absolute inset-0 opacity-5 pointer-events-none" />
+
+    <div className="relative max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 z-10">
+      {[
+        {
+          icon: <FileText className="w-10 h-10 text-[#618ebe] mb-3" />,
+          title: "5 Free Course Generation",
+          desc: "Responsive and mobile-first Courses for the web",
+        },
+        {
+          icon: <Sliders className="w-10 h-10 text-[#618ebe] mb-3" />,
+          title: "Customizable",
+          desc: "Easily customized and extendable",
+        },
+        {
+          icon: <BookOpen className="w-10 h-10 text-[#618ebe] mb-3" />,
+          title: "Free to Use",
+          desc: "Every component and plugin is well documented",
+        },
+        {
+          icon: <MessageCircle className="w-10 h-10 text-[#618ebe] mb-3" />,
+          title: "24/7 Support",
+          desc: "Contact us 24 hours a day, 7 days a week",
+        },
+      ].map((feature, index) => (
+        <SpotlightCard
+          key={index}
+          className="custom-spotlight-card bg-[#0a3d4f] text-white text-center p-6 rounded-lg shadow-md shadow-gray-600 transition-transform transform hover:scale-105 hover:shadow-xl"
+          spotlightColor="rgba(0, 229, 255, 0.6)"
+        >
+          <div className="flex justify-center">{feature.icon}</div>
+          <h3 className="text-xl font-semibold mt-2">{feature.title}</h3>
+          <p className="text-sm mt-2 text-gray-300">{feature.desc}</p>
+        </SpotlightCard>
+      ))}
+    </div>
+  </section>
+
+
+
 
 {/* footer?\ */}
-<footer className="bg-gradient-to-b from-[#0a0a0a] to-black text-white py-12 px-6 border-t border-[#1f1f1f] mt-50">
+<footer className="bg-gradient-to-b  text-white py-12 px-10 border-t border-[#1f1f1f] mt-100">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
          
           <div className="space-y-3">

@@ -14,17 +14,12 @@ export const Spotlight = ({
   xOffset = 100
 } = {}) => {
   return (
+    <div className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none">
     <motion.div
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      transition={{
-        duration: 1.5,
-      }}
-      className="pointer-events-none absolute inset-0 h-full w-full">
+     initial={{ opacity: 0 }}
+     animate={{ opacity: 1 }}
+     transition={{ duration: 1.5 }}
+     className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none">
       <motion.div
         animate={{
           x: [0, xOffset, 0],
@@ -73,7 +68,7 @@ export const Spotlight = ({
           repeatType: "reverse",
           ease: "easeInOut",
         }}
-        className="absolute top-0 right-0 w-screen h-screen z-40 pointer-events-none">
+        className="absolute top-0 right-0 h-screen z-40 pointer-events-none">
         <div
           style={{
             transform: `translateY(${translateY}px) rotate(45deg)`,
@@ -102,5 +97,6 @@ export const Spotlight = ({
           className={`absolute top-0 right-0 origin-top-right`} />
       </motion.div>
     </motion.div>
+    </div>
   );
 };

@@ -117,21 +117,24 @@ await db.update(courseList).set({
   };
 
   return (
-    <div className="text-white bg-black mt-10 px-7 md:px-20 lg:px-44">
+    <div className="text-white mt-10 px-7 md:px-20 lg:px-44">
       <h2 className="font-bold text-center text-2xl">Curated Course</h2>
       <LoadingDialog loading={loading} />
 
       {/* Basic Info */}
       <CourseBasicInfo course={course} edit={true} refreshData={() => GetCourse()} />
-
+      <Button
+  onClick={GenerateChapterContent}
+  className="my-10 px-6 py-3 bg-white hover:bg-[#618ebe] text-white text-black text-xl font-semibold rounded-2xl shadow-md hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out border border-gray-300"
+>
+  Generate Course Content
+</Button>
       {/* Course Details */}
       <CourseDetail course={course} />
 
       {/* Chapter */}
       <ChapterList course={course} />
-      <Button className="my-10 text-black bg-white" onClick={GenerateChapterContent}>
-        Generate Course Content
-      </Button>
+      
     </div>
   );
 }

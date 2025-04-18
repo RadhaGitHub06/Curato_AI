@@ -45,7 +45,7 @@ function Header() {
             <NavbarLogo />
             <NavItems items={navItems} />
             <div className="flex items-center gap-4">
-              <NavbarButton variant="primary" href='/dashboard'>Login / signup</NavbarButton>
+              <NavbarButton variant="primary"  href="/dashboard">Login / signup</NavbarButton>
              
             </div>
           </NavBody>

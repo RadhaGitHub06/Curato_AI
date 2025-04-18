@@ -102,15 +102,15 @@ const SaveCourseLayoutInDb = async (courseLayout) => {
 };
 
   return (
-    <div  className=''>
+    <div  className='bg-[#051318]'>
      {/* stepper */}
      <div className='flex flex-col justify-center items-center'>
-      <h2 className='text-4xl text-white font-medium pb-[30px]'>
-        Create Course
+      <h2 className='text-4xl  pb-[30px] font-bold  text-white bg-clip-text animate-gradient bg-[length:200%_200%]"'>
+      Create Course
       </h2>
-      <div className='flex'>
+    {/* <div className='flex'>
     {StepperOptions.map((item, index) => (
-        <div className='flex items-center' key={item.id}>  {/* Add the unique key here */}
+        <div className='flex items-center' key={item.id}> 
             <div className='flex flex-col items-center w-[50px] md:w-[100px]'>
                 <div className={`text-2xl p-2 rounded-full bg-[#618ebe] 
                     ${activeindex >= index && 'bg-red-300'}`}>
@@ -125,25 +125,64 @@ const SaveCourseLayoutInDb = async (courseLayout) => {
                 </div>
             )}
         </div>
-    ))}
-</div>
+    ))} 
+
+</div> */}
 
      </div>
 <div className='px-10 md:px-20 lg:px-44 mt-10'>
      {/* components */}
 {activeindex==0?<SelectCategory/> :activeindex==1?<TopicDesc/>:<SelectOption/>}
      {/* next previous button */}
-<div className='flex justify-between mt-10'>
-     <Button  className='bg-[#618ebe] text-white text-lg' disabled={activeindex==0} variant='outline' onClick={()=>setactiveindex(activeindex-1)}>
-        Previous
-     </Button>
-     {activeindex<2&&    <Button disabled={checkStatus()}  variant='outline' className='bg-[#618ebe] text-lg text-white' onClick={()=>setactiveindex(activeindex+1)}>
-        Next
-     </Button>}
-    {activeindex==2&& <Button disabled={checkStatus()}   className='bg-[#618ebe] text-lg text-white border' onClick={()=>GenerateCourseLayout()}>
-     Generate Course Layout
-     </Button>}
-     </div>
+     <div className="flex justify-between mt-10 px-4">
+
+{/* Previous Button */}
+<Button
+  disabled={activeindex === 0}
+  onClick={() => setactiveindex(activeindex - 1)}
+  className={`px-6 py-2 text-lg font-semibold rounded-md border backdrop-blur-md transition-all duration-300 shadow-md 
+    ${
+      activeindex === 0 
+        ? 'bg-zinc-400/30 text-white cursor-not-allowed border-zinc-200' 
+        : 'bg-white/10 hover:bg-white/20 text-white border-white hover:shadow-[0_0_10px_rgba(192,132,252,0.6)]'
+    }`}
+>
+  Previous
+</Button>
+
+{/* Next Button */}
+{activeindex < 2 && (
+  <Button
+    disabled={checkStatus()}
+    onClick={() => setactiveindex(activeindex + 1)}
+    className={`px-6 py-2 text-lg font-semibold rounded-md border backdrop-blur-md transition-all duration-300 shadow-md 
+      ${
+        checkStatus()
+          ? 'bg-zinc-400/30 text-white cursor-not-allowed border-zinc-200'
+          : 'bg-gradient-to-r from-[#618ebe] to-[#051318] hover:from-[#051318] hover:to-[#618ebe] text-white border-white hover:shadow-[0_0_14px_rgba(232,121,249,0.6)]'
+      }`}
+  >
+    Next
+  </Button>
+)}
+
+{/* Generate Button */}
+{activeindex === 2 && (
+  <Button
+    disabled={checkStatus()}
+    onClick={() => GenerateCourseLayout()}
+    className={`px-6 py-2 text-lg font-semibold rounded-md border backdrop-blur-md transition-all duration-300 shadow-md 
+      ${
+        checkStatus()
+          ? 'bg-zinc-400/30 text-white cursor-not-allowed border-zinc-200'
+          : 'bg-gradient-to-r from-[#618ebe] to-[#051318] hover:from-[#051318] hover:to-[#618ebe] text-white border-white hover:shadow-[0_0_16px_rgba(236,72,153,0.7)]'
+      }`}
+  >
+    Generate Course Layout
+  </Button>
+)}
+</div>
+
 
      </div>
          <LoadingDialog loading={loading} />

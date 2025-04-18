@@ -1,40 +1,30 @@
 "use client";
-import { SignIn, SignUp } from "@clerk/nextjs";
-import Image from "next/image";
-
+import { SignIn } from "@clerk/nextjs";
 import { BackgroundGradient } from "../../../../Components/ui/gradient-card";
 import Aurora from "../../../../Components/ui/Aurorabg";
+
 export default function Page() {
   return (
-    <div className="bg-black flex flex-col items-center justify-center">
-   <Aurora
-  colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
-  blend={0.8}
-  amplitude={1.0}
-  speed={2.0}
-/>
+    <div className="relative min-h-screen bg-[#051318] overflow-hidden flex items-center justify-center">
+      
+      {/* Aurora Background (Behind Everything) */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Aurora
+          colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
+          blend={0.8}
+          amplitude={1.0}
+          speed={2.0}
+        />
+      </div>
 
-      <Image
-      src={'/logo.svg'}
-      width={300}
-      height={200}
-      alt="logo"
-      className=""
-      />
-    
-      <div className="min-h-screen flex items-center justify-center  text-white relative overflow-hidden">
-       
-
-        {/* Right Side - SignUp Form */}
-        <BackgroundGradient className="rounded-[22px] p-2  sm:p-5  dark:bg-zinc-900">
-            <div className="w-full flex justify-center items-center px-2 z-10 rounded-2xl">
-          <div className=" rounded-lg p-2 shadow-2xl max-w-md w-full">
-            <SignIn/>
+      {/* Sign In Card */}
+      <div className="z-10 w-full flex items-center justify-center  px-4">
+        <BackgroundGradient className="rounded-[22px] p-2 sm:p-5 dark:bg-zinc-900">
+          <div className="w-full max-w-md rounded-lg shadow-2xl bg-black/70 backdrop-blur-md p-6">
+            <SignIn />
           </div>
-        </div>
-</BackgroundGradient>
-        {/* Background Glow */}
-        </div>
+        </BackgroundGradient>
+      </div>
     </div>
   );
 }

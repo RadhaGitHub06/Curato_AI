@@ -199,7 +199,7 @@ export const NavbarLogo = () => {
         alt="logo"
         width={250}
         height={100} />
-      <span className="font-medium text-black dark:text-white">Startup</span>
+    
     </Link>
   );
 };

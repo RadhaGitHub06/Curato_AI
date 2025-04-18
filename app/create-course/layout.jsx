@@ -8,7 +8,7 @@ function Createcourselayout({ children }) {
 
   return (
     <UserInputContext.Provider value={{ userCourseInput, setUserCourseInput }}>
-      <div className="relative min-h-screen bg-black pattern-grid text-white overflow-hidden">
+      <div className="relative min-h-screen bg-[#051318] pattern-grid text-white overflow-hidden">
 
         {/* Gradient overlay: gray in center, black edges */}
         <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-radial" />
