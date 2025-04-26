@@ -3,7 +3,7 @@ import React from 'react';
 function ChapterListCard({ chapter, index }) {
   return (
     <div
-      className="text-white flex items-start gap-4 p-3 hover:bg-white/10 transition-all duration-300 rounded-lg"
+      className="text-white flex items-start gap-4 p-3 hover:bg-white/10 transition-all duration-00 rounded-lg"
     >
       {/* Index circle */}
       <div className="flex-shrink-0 pt-1">

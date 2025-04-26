@@ -15,65 +15,67 @@ const opts = {
 function ChpaterContent({ chapter, content }) {
   return (
     <motion.div
-      className="text-white p-6 md:p-10"
+      className="text-white p-6 md:p-10 space-y-8"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
       {/* Chapter Header */}
-      <motion.h2
-        className="text-3xl font-bold text-[#79b8ff] mb-2"
+      <motion.div
+        className="text-center space-y-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        {chapter?.ChapterName}
-      </motion.h2>
-
-      <motion.p
-        className="text-gray-400 mb-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-      >
-        {chapter?.About}
-      </motion.p>
-
-      {/* Video Section */}
-      <motion.div
-        className="flex justify-center mb-10"
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        <YouTube videoId={content?.VideoId} opts={opts} />
+        <h2 className="text-3xl md:text-4xl font-bold text-[#79b8ff] drop-shadow-md">
+          {chapter?.ChapterName || "Start Your Learning With CuratoAi"}
+        </h2>
+        <p className="text-gray-400 text-sm md:text-base">
+          {chapter?.About || "Click on Chapter "}
+        </p>
       </motion.div>
 
-      {/* Content Blocks */}
-      {content?.content?.map((item, index) => (
+      {/* Video Section */}
+      {content?.VideoId && (
         <motion.div
-          key={index}
-          className="p-5 mb-6 rounded-lg bg-white/5 border border-white/10 hover:shadow-lg transition-all duration-300"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 * (index + 1) }}
+          className="flex justify-center"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.4 }}
         >
-          <h3 className="font-semibold text-xl text-[#add8ff] mb-3">
-            {item.title}
-          </h3>
-          <p className="text-gray-300 whitespace-pre-wrap leading-relaxed">{item.explanation}</p>
-        <p>
-  {item.explanation}</p>
-
-          {item.code_example && (
-            <div className="bg-black/50 text-sm text-blue-00 font-mono p-4 mt-4 rounded-md overflow-x-auto transition-all duration-300 hover:scale-[1.01]">
-              <pre>
-                <code>{item.code_example}</code>
-              </pre>
-            </div>
-          )}
+          <YouTube videoId={content?.VideoId} opts={opts} />
         </motion.div>
-      ))}
+      )}
+
+      {/* Content Blocks */}
+      <div className="space-y-6">
+        {content?.content?.map((item, index) => (
+          <motion.div
+            key={index}
+            className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 * (index + 1) }}
+          >
+            <h3 className="font-semibold text-2xl text-[#add8ff] mb-4">
+              {item.title}
+            </h3>
+            <p className="text-gray-300 whitespace-pre-wrap leading-relaxed text-base mb-4">
+              {item.explanation}
+            </p>
+
+            {/* Code Block */}
+            {item.code_example && (
+              <div className="bg-black/50 text-green-300 font-mono text-sm p-4 rounded-md overflow-x-auto">
+                <pre>
+                  <code>{item.code_example}</code>
+                </pre>
+              </div>
+            )}
+          </motion.div>
+        ))}
+      </div>
+
     </motion.div>
   );
 }

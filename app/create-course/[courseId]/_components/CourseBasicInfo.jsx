@@ -33,7 +33,7 @@ function CourseBasicInfo({ course, refreshData, edit = true }) {
       await uploadBytes(storageRef, file);
       const url = await getDownloadURL(storageRef); // Get the image URL
       console.log("Upload complete:", url);
-   
+
       // Update DB with Firebase URL
       await db
         .update(courseList)
@@ -46,14 +46,6 @@ function CourseBasicInfo({ course, refreshData, edit = true }) {
       console.error("Upload failed:", error);
     }
   };
-  const handleClick = (event) => {
-    // Prevent the default link behavior (navigation)
-    event.preventDefault();
-  
-    // Now log to the console
-    console.log('Button was clicked!');
-  };
-  
 
   return (
     <div className="p-10 border rounded-xl shadow-sm shadow-orange-50 mt-5">
@@ -77,11 +69,11 @@ function CourseBasicInfo({ course, refreshData, edit = true }) {
             {course?.category}
           </h1>
           {!edit && (
-           <Link href={"/Course/" + course?.courseId + "/start"}>
-           <Button  className="bg-white text-black w-full hover:scale-1.1">
-             Start
-           </Button>
-         </Link>
+            <Link href={"/Course/" + course?.courseId + "/start"}>
+              <Button className="bg-white text-black w-full hover:scale-1.1">
+                Start
+              </Button>
+            </Link>
           )}
         </div>
 

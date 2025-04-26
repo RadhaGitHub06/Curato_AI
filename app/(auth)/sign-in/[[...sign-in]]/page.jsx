@@ -5,23 +5,26 @@ import Aurora from "../../../../Components/ui/Aurorabg";
 
 export default function Page() {
   return (
-    <div className="relative min-h-screen bg-[#051318] overflow-hidden flex items-center justify-center">
+    <div className="relative min-h-screen bg-[#0c0c1d] overflow-hidden flex items-center justify-center">
       
-      {/* Aurora Background (Behind Everything) */}
+    
+      <div className="absolute inset-0 z-0 bg-[url('/signout.svg')] w-[500px] bg-cover opacity-10"></div>
+     
+      {/* Aurora Effect */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Aurora
-          colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
+          colorStops={["#6C63FF", "#FF6BAA", "#FF3E3E"]}
           blend={0.8}
           amplitude={1.0}
           speed={2.0}
         />
       </div>
 
-      {/* Sign In Card */}
-      <div className="z-10 w-full flex items-center justify-center  px-4">
-        <BackgroundGradient className="rounded-[22px] p-2 sm:p-5 dark:bg-zinc-900">
-          <div className="w-full max-w-md rounded-lg shadow-2xl bg-black/70 backdrop-blur-md p-6">
-            <SignIn />
+      {/* Centered Sign-in Box */}
+      <div className="z-10 w-full flex items-center justify-center px-4">
+        <BackgroundGradient className="rounded-[22px] p-1 sm:p-4 dark:bg-transparent">
+          <div className="w-full max-w-md rounded-2xl shadow-2xl bg-white/5 backdrop-blur-lg p-1 ">
+            <SignIn appearance={{ elements: { card: 'bg-transparent shadow-none' } }} />
           </div>
         </BackgroundGradient>
       </div>

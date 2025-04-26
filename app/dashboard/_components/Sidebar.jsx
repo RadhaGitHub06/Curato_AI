@@ -47,7 +47,7 @@ function SidebarDemo() {
       <Sidebar open={open} setOpen={setOpen} className="  text-white">
 
         <SidebarBody className="justify-between gap-10 ">
-           <Image src={'/education.svg'} width={200} height={100} alt="Logo" />
+           <Image src={'/education.svg'} width={150} height={150} alt="Logo" />
           <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
             <div className="mt-8 flex flex-col gap-2">
             {links.map((link, idx) => {

@@ -102,7 +102,7 @@ const SaveCourseLayoutInDb = async (courseLayout) => {
 };
 
   return (
-    <div  className='bg-[#051318]'>
+    <div  className=''>
      {/* stepper */}
      <div className='flex flex-col justify-center items-center'>
       <h2 className='text-4xl  pb-[30px] font-bold  text-white bg-clip-text animate-gradient bg-[length:200%_200%]"'>

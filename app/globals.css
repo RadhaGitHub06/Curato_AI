@@ -206,3 +206,9 @@
   animation: fade-in 0.6s ease-out;
 }
 
+.sticky-sidebar {
+  position: sticky;
+  top: 0;  /* Keeps the sidebar stuck at the top of the screen when scrolling */
+  height: 100vh;  /* Full height of the viewport */
+  overflow-y: auto;  /* Prevents sidebar content from being scrollable */
+}

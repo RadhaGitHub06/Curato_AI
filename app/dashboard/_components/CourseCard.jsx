@@ -3,7 +3,7 @@ import React from "react";
 import { FaBookOpen, FaChartLine } from "react-icons/fa"; // Import icons
 import { HiMiniEllipsisVertical } from "react-icons/hi2";
 import DropdownOption from "./DropdownOption";
-import { courseList as courseSchema } from "../../../configs/schema";
+import { courseList as courseSchema ,Chapters} from "../../../configs/schema";
 import { eq } from "drizzle-orm";
 import db from "../../../configs/db"; // Ensure correct DB import
 import Link from "next/link";
@@ -14,15 +14,28 @@ function CourseCard({ course, refreshData , displayUser=false}) {
       console.error("Error: course ID is undefined");
       return;
     }
-
+  
     try {
-      const resp = await db
+      // First, delete all chapters related to the course
+      const deleteChaptersResp = await db
+        .delete(Chapters)
+        .where(eq(Chapters.courseId,course.courseId));
+  
+        console.log("Chapters delete response:", deleteChaptersResp);
+      if (deleteChaptersResp.length > 0) {
+        console.log("✅ Chapters deleted successfully.");
+      } else {
+        console.warn("⚠️ No chapters found for this course.");
+      }
+  
+      // Now delete the course itself using courseSchema
+      const deleteCourseResp = await db
         .delete(courseSchema)
         .where(eq(courseSchema.id, course.id))
         .returning({ id: courseSchema.id });
-
-      if (resp.length > 0) {
-        console.log("✅ Course deleted successfully:", resp);
+  
+      if (deleteCourseResp.length > 0) {
+        console.log("✅ Course deleted successfully:", deleteCourseResp);
         refreshData(); // Refresh UI after successful delete
       } else {
         console.warn("⚠️ No course found to delete.");
@@ -31,6 +44,8 @@ function CourseCard({ course, refreshData , displayUser=false}) {
       console.error("❌ Deletion error:", error);
     }
   };
+  
+  
 
   return (
     <div className="bg-white/10 shadow-lg border border-gray-700 p-3 rounded-lg max-w-sm w-full mx-auto sm:max-w-md lg:max-w-lg hover:scale-105 transition-all cursor-pointer mt-5">

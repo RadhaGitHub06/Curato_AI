@@ -6,7 +6,8 @@ import Aurora from "../../../../Components/ui/Aurorabg";
 export default function Page() {
   return (
     <div className="relative min-h-screen bg-[#051318]  overflow-hidden flex items-center justify-center">
-      
+            <div className="absolute inset-0 z-0 bg-[url('/signout.svg')] w-[500px] bg-cover opacity-10"></div>
+     
       {/* Aurora Background (Behind Everything) */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Aurora
@@ -16,9 +17,7 @@ export default function Page() {
           speed={2.0}
         />
       </div>
-<h1>
-  Sign in to Curato AI
-</h1>
+
       {/* Sign In Card */}
       <div className="z-10 w-full flex items-center justify-center  px-4">
         <BackgroundGradient className="rounded-[22px] p-2 sm:p-5 dark:bg-zinc-900">
