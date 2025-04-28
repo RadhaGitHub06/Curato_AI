@@ -7,6 +7,7 @@ import { useParams, useRouter } from 'next/navigation'
 import ChapterListCard from './_components/ChapterListCard'
 import ChpaterContent from './_components/ChpaterContent'
 import { Menu, X } from 'lucide-react'
+import { TracingBeam } from '../../../../Components/ui/tracing-beam'
 
 function CourseStart() {
   const params = useParams();
@@ -39,6 +40,7 @@ function CourseStart() {
   const chapters = course?.courseOutput?.Course?.Chapters;
 
   return (
+
     <div className="relative min-h-screen bg-gradient-to-br from-[#051318] to-[#152c3d] overflow-hidden">
       {/* Radial Background */}
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_1px_1px,_#ffffff0a_1px,_transparent_0)] bg-[length:30px_30px]" />
@@ -98,6 +100,7 @@ function CourseStart() {
 
 
           {/* Main Content */}
+          
           <div className="flex-1 p-6 lg:pl-[300px] sm:pl-[5px] overflow-y-auto">
           <div className="text-center py-6">
           <h1 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg tracking-wide">
@@ -109,11 +112,12 @@ function CourseStart() {
               <ChpaterContent chapter={selectedChapter} content={chapterContent} />
             </div>
           </div>
-
+       
         </div>
 
       </div>
     </div>
+   
   )
 }
 

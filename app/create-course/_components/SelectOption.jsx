@@ -91,7 +91,7 @@ function SelectOption() {
         {/* Number of Chapters */}
      
         <div className={baseCardStyles}>
-          <label className={labelStyles}>📚 Number of Chapters</label>
+          <label className={labelStyles}>📚 Number of Chapters....(up to 5)</label>
           <Input
             type="number"
             onChange={(e) =>
