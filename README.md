@@ -1,68 +1,63 @@
+# 📚 Curato AI  
+**The Next-Generation AI Course Curation Platform**  
 
-📚 Curato AI: The Next-Generation AI Course Curation Platform
-Curato AI is an innovative platform that leverages Generative AI and a robust tech stack to redefine online education. It empowers educators and creators to generate, customize, and monetize comprehensive courses while offering learners unique, flexible learning paths.
+Curato AI is an innovative platform that leverages **Generative AI** and a robust tech stack to redefine online education. It empowers educators and creators to generate, customize, and monetize comprehensive courses while offering learners unique, flexible learning paths.
 
-✨ Features
+---
+
+## ✨ Features  
+
 Curato AI provides a powerful suite of tools for both content creation and consumption:
 
-🧠 AI-Powered Course Creation: Utilize the Google Gemini API to instantly generate structured course outlines, modules, and suggested content based on a simple prompt.
+- 🧠 **AI-Powered Course Creation**: Instantly generate structured course outlines, modules, and suggested content using the **Google Gemini API**.  
+- ✂️ **Customizable Learning**: Refine, reorder, and integrate proprietary content into AI-generated structures.  
+- 💰 **Course Marketplace**: Publish and sell courses; learners can browse and purchase access.  
+- 🎥 **Integrated Video Curation**: Search and embed relevant video content with the **YouTube Data API**.  
+- 🔒 **Secure User Management**: Authentication and profile management powered by **Clerk**.  
 
-✂️ Customizable Learning: Creators can easily refine, reorder, and integrate their own proprietary content into the AI-generated structure.
+---
 
-💰 Course Marketplace: A built-in system allows creators to publish and sell their courses, and users to purchase access.
+## 🛠️ Tech Stack  
 
-🎥 Integrated Video Curation: Seamlessly search for and embed relevant video content into course modules using the YouTube Data API.
-
-🔒 Secure User Management: Robust and modern authentication powered by Clerk handles sign-up, login, and user profile management.
-
-🛠️ Tech Stack
 Curato AI is built on a modern, high-performance, and scalable full-stack architecture:
 
-Category	Technology	Purpose
-Frontend	Next.js (React)	Full-stack framework for rendering, routing, and server components.
-Styling	Tailwind CSS	Utility-first CSS framework for rapid and consistent UI development.
-Database	Neon (PostgreSQL)	Serverless PostgreSQL for scalable, reliable, and decoupled data persistence.
-ORM	Drizzle ORM	Type-safe and performant TypeScript ORM for query building.
-Authentication	Clerk	Secure user authentication, authorization, and profile management.
-AI Integration	Google Gemini API	Powering core generative and content-summarization features.
-Video	YouTube Data API	Facilitating in-app video search and embedding.
-Storage	Firebase (Storage)	Cloud storage for course assets, banner images, and recordings.
+| Category           | Technology         | Purpose                                                                 |
+|--------------------|--------------------|-------------------------------------------------------------------------|
+| **Frontend**       | Next.js (React)    | Full-stack framework for rendering, routing, and server components.     |
+| **Styling**        | Tailwind CSS       | Utility-first CSS framework for rapid and consistent UI development.    |
+| **Database**       | Neon (PostgreSQL)  | Serverless PostgreSQL for scalable, reliable, and decoupled persistence.|
+| **ORM**            | Drizzle ORM        | Type-safe and performant TypeScript ORM for query building.             |
+| **Authentication** | Clerk              | Secure user authentication, authorization, and profile management.      |
+| **AI Integration** | Google Gemini API  | Powering generative and content-summarization features.                 |
+| **Video**          | YouTube Data API   | Facilitating in-app video search and embedding.                         |
+| **Storage**        | Firebase Storage   | Cloud storage for course assets, banners, and recordings.               |
 
-Export to Sheets
-🚀 Getting Started
-Follow these steps to set up and run the Curato AI project locally.
+---
 
-Prerequisites
-You'll need the following installed:
+## 🚀 Getting Started  
 
-Node.js (v18+)
+Follow these steps to set up and run the Curato AI project locally.  
 
-npm or yarn
+### ✅ Prerequisites  
+- Node.js (v18+)  
+- npm or yarn  
+- Neon PostgreSQL database instance  
+- API keys for Clerk, Gemini, and YouTube  
 
-A Neon PostgreSQL database instance.
+### 📥 Installation  
 
-API keys for Clerk, Gemini, and YouTube.
-
-Installation
-Clone the Repository:
-
-Bash
-
+1. **Clone the Repository**  
+```bash
 git clone https://github.com/RadhaGitHub06/Curato_AI.git
 cd Curato_AI
-Install Dependencies:
-
-Bash
-
+2.Install Dependencies
 npm install
 # or
 yarn install
-Configure Environment Variables:
-Create a file named .env.local in the root directory and add your required keys and connection strings:
+Configure Environment Variables
+Create a .env.local file in the root directory:
 
-Code snippet
-
-# Database (Your Neon Connection String)
+# Database (Neon PostgreSQL)
 DATABASE_URL="postgresql://user:password@endpoint-id.cloud.neon.tech/database_name?sslmode=require"
 
 # Authentication (Clerk)
@@ -75,102 +70,124 @@ NEXT_PUBLIC_YOUTUBE_API_KEY="<YOUR_YOUTUBE_API_KEY>"
 
 # Firebase Configuration (for Storage)
 NEXT_PUBLIC_FIREBASE_API_KEY="..."
-# Add other necessary Firebase config variables...
-Run Drizzle Migrations:
-Initialize your database schema by running your Drizzle migration script:
+# Add other Firebase config variables...
 
-Bash
+4.Run Drizzle Migrations
+ npm run db:migrate
 
-# Execute the Drizzle migration script defined in your package.json
-npm run db:migrate 
-Run the Development Server:
-
-Bash
-
+5.Run the Development Server
 npm run dev
 # or
 yarn dev
-Open your browser to http://localhost:3000 to view the application.
-
+Visit 👉 http://localhost:3000
+```
 📂 Project Structure
-The project adheres to the Next.js App Router convention for a clear separation of concerns:
-
+```bash
 Curato_AI/
 ├── app/                  # Next.js App Router (Routes & UI)
 │   ├── (platform)/       # Core application routes (dashboard, course management, etc.)
 │   ├── (auth)/           # Clerk authentication routes (sign-in, sign-up)
-│   ├── api/              # Backend API routes (handling Gemini/YouTube requests, DB ops)
+│   ├── api/              # Backend API routes (Gemini/YouTube requests, DB ops)
 ├── components/           # Reusable UI components (buttons, modals, course cards)
-├── config/               # Configuration files (e.g., Clerk middleware, Firebase config)
+├── config/               # Config files (Clerk middleware, Firebase setup)
 ├── lib/                  # Utilities, helpers, and data access logic
-│   ├── db/               # Drizzle connection and schema definition
+│   ├── db/               # Drizzle connection + schema definition
 │   ├── hooks/            # Custom React hooks
 │   └── utils.ts          # General utility functions
 ├── public/               # Static assets (images, fonts)
 ├── styles/               # Tailwind CSS setup
 └── package.json          # Dependencies and scripts
-🗄️ Database Schema (Neon + Drizzle ORM)
-The data model uses two primary tables defined with Drizzle ORM to manage course creation and content:
+```
+## 🗄️ Database Schema (Neon + Drizzle ORM)
 
-1. courses Table (courseList)
-Stores course metadata, ownership, and marketplace details.
+## 1. `courses` Table (`courseList`)  
+Stores course metadata, ownership, and marketplace details.  
 
-Field Name	Data Type	Description	Key Points
-id	serial	Primary Key.	Auto-incrementing.
-courseId	varchar	Unique course ID.	Used to link to chapters.
-name	varchar	Course Title.	Required.
-category	varchar	Course subject.	Required.
-courseOutput	json	AI-generated course outline/data.	Stored as JSON object.
-createdBy	varchar	Creator's Clerk User ID.	Links to user management.
-publish	boolean	Marketplace visibility status.	Default: false (draft).
+| Field Name   | Data Type | Description                       | Key Points                           |
+|--------------|-----------|-----------------------------------|--------------------------------------|
+| **id**       | serial    | Primary Key.                      | Auto-incrementing.                    |
+| **courseId** | varchar   | Unique course ID.                 | Links to chapters.                    |
+| **name**     | varchar   | Course Title.                     | Required.                             |
+| **category** | varchar   | Course subject.                   | Required.                             |
+| **courseOutput** | json  | AI-generated course outline/data. | Stored as JSON object.                |
+| **createdBy** | varchar  | Creator's Clerk User ID.          | Links to user management.             |
+| **publish**  | boolean   | Marketplace visibility status.    | Default: `false` (draft).             |
 
-Export to Sheets
-2. chapters Table (Chapters)
-Stores the detailed content for each module within a course.
+---
 
-Field Name	Data Type	Description	Key Points
-id	serial	Primary Key.	Auto-incrementing.
-courseId	varchar	Links to the parent course.	References courseList.courseId.
-chapterId	integer	Order of the chapter.	Determines sequence.
-content	json	Detailed chapter text/instructions.	Required.
-VideoId	varchar	YouTube video ID.	Used for embedding.
+### 2. `chapters` Table (`Chapters`)  
+Stores detailed content for each module in a course.  
 
-Export to Sheets
-🔐 User Management (Clerk)
-We use Clerk to provide a secure and integrated user experience.
+| Field Name   | Data Type | Description                  | Key Points                          |
+|--------------|-----------|------------------------------|-------------------------------------|
+| **id**       | serial    | Primary Key.                 | Auto-incrementing.                   |
+| **courseId** | varchar   | Links to the parent course.  | References `courseList.courseId`.    |
+| **chapterId**| integer   | Order of the chapter.        | Determines sequence.                  |
+| **content**  | json      | Chapter text/instructions.   | Required.                             |
+| **videoId**  | varchar   | YouTube video ID.            | Used for embedding.                   |
 
-Seamless Authentication: Provides fast, secure sign-in and sign-up flows.
+---
 
-Protected Routes: Ensures content creation and viewing features are limited to authenticated users.
+## 🔐 User Management (Clerk)
 
-User Profiles: Manages user identity, profile images, and ownership details (createdBy).
+- **Seamless Authentication**: Secure sign-up and sign-in flows.  
+- **Protected Routes**: Restrict content creation/viewing to authenticated users.  
+- **User Profiles**: Manage identity, profile images, and course ownership (`createdBy`).
+  
 
-🖼️ Screenshots & Demo
-(Note: Please replace the placeholders below with actual images and links to make your README shine!)
+---
 
-Feature	Description	Media
-AI Course Generation	The creation interface showing the initial AI-generated course structure.	
-Module Editor	The drag-and-drop interface for customizing chapters and content.	
-Live Demo	A short video or GIF showing the core creator workflow.	[Video of Core Platform Functionality] (Link to YouTube or GIF)
+## 🖼️ Screenshots & Demo  
 
-Export to Sheets
+| Feature              | Description                                        | Media |
+|-----------------------|----------------------------------------------------|-------|
+| **User Management (Clerk)** | Secure sign-up, login, and profile handling. |<img width="1919" height="1059" alt="Screenshot 2025-09-29 190745" src="https://github.com/user-attachments/assets/54a2ee9d-3277-40a1-9b44-ab8d8ca67c8f" /> |
+| **Database Schema**   | Courses & Chapters tables using Drizzle + Neon.   | <img width="1711" height="772" alt="Screenshot 2025-09-30 121519" src="https://github.com/user-attachments/assets/56097553-9b4c-406a-b448-9001bc7a33ac" />
+ |
+| **Live Demo**         | Core creator workflow demo.                       | [Watch Video](https://drive.google.com/file/d/1dNUuwUvIvY-24smrADOUMJDjiZLvoHYN/view?usp=drive_link) |
+
+
+
+https://github.com/user-attachments/assets/c30f12e2-558d-4c2f-9ecf-c1a42ff65656
+
+
+---
+
+
+Module Editor	Drag-and-drop interface for chapters/content.	
+
+Live Demo	Core creator workflow demo.	Watch Video
+
+(Replace placeholders with real screenshots & demo links)
+
 🤝 Contribution
-We welcome contributions! Please feel free to open an issue or submit a pull request.
+
+We welcome contributions! 🎉
 
 Fork the repository.
 
-Create your feature branch (git checkout -b feature/NewFeature).
+Create your feature branch:
 
-Commit your changes (git commit -m 'feat: Added New Feature').
+git checkout -b feature/NewFeature
 
-Push to the branch (git push origin feature/NewFeature).
+
+Commit your changes:
+
+git commit -m 'feat: Added New Feature'
+
+
+Push to the branch:
+
+git push origin feature/NewFeature
 
 Open a Pull Request.
 
-📄 License
-Distributed under the MIT License. See LICENSE for more information.
-
 📧 Contact
-Radha - [Your Email Address or Portfolio Link]
 
-Project Link: https://github.com/RadhaGitHub06/Curato_AI.git
+Radha – rg9319738@gmail.com
+
+🔗 Project Link: https://curato-ai-byradha.vercel.app/
+
+
+---
+
