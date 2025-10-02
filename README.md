@@ -141,7 +141,8 @@ Stores detailed content for each module in a course.
 
 | Feature              | Description                                        | Media |
 |-----------------------|----------------------------------------------------|-------|
-| **User Management (Clerk)** | Secure sign-up, login, and profile handling. |<img width="1919" height="1059" alt="Screenshot 2025-09-29 190745" src="https://github.com/user-attachments/assets/54a2ee9d-3277-40a1-9b44-ab8d8ca67c8f" /> |
+| **User Management (Clerk)** | Secure sign-up, login, and profile handling. |<img width="1884" height="1017" alt="Screenshot 2025-09-30 115505" src="https://github.com/user-attachments/assets/34d06897-f86b-4046-8ae6-eac06b0e9e04" />
+ |
 | **Database Schema**   | Courses & Chapters tables using Drizzle + Neon.   | <img width="1711" height="772" alt="Screenshot 2025-09-30 121519" src="https://github.com/user-attachments/assets/56097553-9b4c-406a-b448-9001bc7a33ac" />
  |
 | **Live Demo**         | Core creator workflow demo.                       | [Watch Video](https://drive.google.com/file/d/1dNUuwUvIvY-24smrADOUMJDjiZLvoHYN/view?usp=drive_link) |
