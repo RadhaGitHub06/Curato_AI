@@ -9,7 +9,7 @@ const {
 const apiKey = "AIzaSyDi47uMumsn-8t4dWVsU4dV5YpehU2MvMI";  
 const genAI = new GoogleGenerativeAI(apiKey);
 
-  
+  //new
  const model = genAI.getGenerativeModel({
   model: "gemini-pro",
 });
