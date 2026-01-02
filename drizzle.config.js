@@ -1,11 +1,5 @@
 import { defineConfig } from "drizzle-kit";
-// export default {
-//     schema: "./configs/schema.jsx",
-//     dialect: "postgresql",
-//     dbCredentials: {
-//         connectionString: process.env.NEXT_PUBLIC_DB_CONNECTION_STRING,  // ✅ Use `connectionString` instead of `url`
-//     }
-// };
+
 
 export default defineConfig({
     schema: "./configs/schema.jsx",

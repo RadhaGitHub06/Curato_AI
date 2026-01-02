@@ -36,15 +36,7 @@ useEffect(() => {
         setDiscription(course.courseOutput.Course.Description || '');
     }
 }, [course]);
-// const onUpdateHandler=async()=>{
-//     course.courseOutput.Course.Name=Name;
-//     course.courseOutput.Course.Description=Description;
-//    const result=await db.update(courseList).set({
-//     courseOutput:course?.courseOutput
-//    }).returning({id:courseList.id});
-//    console.log(result)
-//    console.log(course)
-// }
+
 const onUpdateHandler = async () => {
     // Deep clone the object to avoid circular reference issues
     const updatedCourse = _.cloneDeep(course);

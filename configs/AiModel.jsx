@@ -6,12 +6,12 @@ const {
 //   const fs = require("node:fs");
 //   const mime = require("mime-types");
   
-const apiKey = "AIzaSyDi47uMumsn-8t4dWVsU4dV5YpehU2MvMI";  // Replace with your Gemini API key
+const apiKey = "AIzaSyDi47uMumsn-8t4dWVsU4dV5YpehU2MvMI";  
 const genAI = new GoogleGenerativeAI(apiKey);
 
   
   const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash",
+    model: "gemini-1.5-flash",
   });
   
   const generationConfig = {
