@@ -6,7 +6,7 @@ const {
 //   const fs = require("node:fs");
 //   const mime = require("mime-types");
   
-const apiKey = "AIzaSyDi47uMumsn-8t4dWVsU4dV5YpehU2MvMI";  
+const apiKey = "AIzaSyDJJypJnlpkYPzN-tDswfrVP-QtsMnCvJU";  
 const genAI = new GoogleGenerativeAI(apiKey);
 
   //new
