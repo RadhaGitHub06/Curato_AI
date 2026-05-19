@@ -5,10 +5,8 @@ import { Button } from "../../../../Components/ui/button";
 import EditCourseBasicInfo from "./EditCourseBasicInfo";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../../configs/firebaseConfig";
-import db from "../../../../configs/db"; // Import db
-import { courseList } from "../../../../configs/schema";
-import { eq } from "drizzle-orm";
 import Link from "next/link";
+import { updateCourseBannerById } from "../../../actions/courseActions";
 
 function CourseBasicInfo({ course, refreshData, edit = true }) {
   const [selectedfile, setSelectedFile] = useState(null);
@@ -35,10 +33,7 @@ function CourseBasicInfo({ course, refreshData, edit = true }) {
       console.log("Upload complete:", url);
 
       // Update DB with Firebase URL
-      await db
-        .update(courseList)
-        .set({ courseBanner: url }) // Use the correct URL variable
-        .where(eq(courseList.id, course.id));
+      await updateCourseBannerById(course.id, url);
 
       setImageUrl(url);
       refreshData(url);

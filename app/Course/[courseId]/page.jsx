@@ -1,13 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import db from "../../../configs/db"; // Adjust import as needed
-import { courseList } from "../../../configs/schema";
-import { eq } from "drizzle-orm";
 import CourseBasicInfo from "../../create-course/[courseId]/_components/CourseBasicInfo";
 import Header from "../../dashboard/_components/Header";
 import CourseDetail from "../../create-course/[courseId]/_components/CourseDetail";
 import ChapterList from "../../create-course/[courseId]/_components/ChapterList";
+import { getCourseByCourseId } from "../../actions/courseActions";
 
 
 export default function CoursePage() {
@@ -22,10 +20,10 @@ export default function CoursePage() {
 
   const GetCourse = async () => {
     try {
-      const result = await db.select().from(courseList).where(eq(courseList?.courseId, courseId));
+      const result = await getCourseByCourseId(courseId);
       console.log(result)
-      if (result.length > 0) {
-        setCourse(result[0]);
+      if (result) {
+        setCourse(result);
       } else {
         console.warn("No course found!");
       }

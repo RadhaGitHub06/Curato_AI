@@ -1,12 +1,10 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import db from "../../../configs/db";
-import { eq } from "drizzle-orm";
-import { courseList as courseSchema } from "../../../configs/schema";
 import { useUser } from "@clerk/nextjs";
 import CourseCard from "./CourseCard";
 import { UserCourseList } from "../../_context/UserCourseList";
 import LoadingDialog from "../../create-course/_components/LoadingDialog";
+import { getCoursesByOwner } from "../../actions/courseActions";
 
 function CourseList() {
     const [courseList, setCourseList] = useState([]);
@@ -21,10 +19,7 @@ function CourseList() {
     const getUserCourse = async () => {
         setLoading(true);
         try {
-            const result = await db
-                .select()
-                .from(courseSchema)
-                .where(eq(courseSchema.createdBy, user?.primaryEmailAddress?.emailAddress));
+            const result = await getCoursesByOwner(user?.primaryEmailAddress?.emailAddress);
 
             console.log("Fetched Courses:", result);
             setCourseList(result);

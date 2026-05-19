@@ -3,10 +3,8 @@ import React from "react";
 import { FaBookOpen, FaChartLine } from "react-icons/fa"; // Import icons
 import { HiMiniEllipsisVertical } from "react-icons/hi2";
 import DropdownOption from "./DropdownOption";
-import { courseList as courseSchema ,Chapters} from "../../../configs/schema";
-import { eq } from "drizzle-orm";
-import db from "../../../configs/db"; // Ensure correct DB import
 import Link from "next/link";
+import { deleteCourseByIdAndCourseId } from "../../actions/courseActions";
 
 function CourseCard({ course, refreshData , displayUser=false}) {
   const handleOnDelete = async () => {
@@ -16,30 +14,8 @@ function CourseCard({ course, refreshData , displayUser=false}) {
     }
   
     try {
-      // First, delete all chapters related to the course
-      const deleteChaptersResp = await db
-        .delete(Chapters)
-        .where(eq(Chapters.courseId,course.courseId));
-  
-        console.log("Chapters delete response:", deleteChaptersResp);
-      if (deleteChaptersResp.length > 0) {
-        console.log("✅ Chapters deleted successfully.");
-      } else {
-        console.warn("⚠️ No chapters found for this course.");
-      }
-  
-      // Now delete the course itself using courseSchema
-      const deleteCourseResp = await db
-        .delete(courseSchema)
-        .where(eq(courseSchema.id, course.id))
-        .returning({ id: courseSchema.id });
-  
-      if (deleteCourseResp.length > 0) {
-        console.log("✅ Course deleted successfully:", deleteCourseResp);
-        refreshData(); // Refresh UI after successful delete
-      } else {
-        console.warn("⚠️ No course found to delete.");
-      }
+      await deleteCourseByIdAndCourseId(course.id, course.courseId);
+      refreshData();
     } catch (error) {
       console.error("❌ Deletion error:", error);
     }

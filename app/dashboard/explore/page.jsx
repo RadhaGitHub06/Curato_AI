@@ -1,9 +1,8 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import db from '../../../configs/db';
-import { courseList } from '../../../configs/schema';
 import CourseCard from '../_components/CourseCard';
 import { Button } from '../../../Components/ui/button';
+import { getPaginatedCourses } from '../../actions/courseActions';
 
 function Explore() {
   const [courseListData, setCourseListData] = useState([]);
@@ -17,7 +16,7 @@ function Explore() {
 
   const GetAllCourse = async () => {
     try {
-      const result = await db.select().from(courseList).limit(9).offset(pageIndex*9);
+      const result = await getPaginatedCourses(9, pageIndex * 9);
       setCourseListData(result);
     } catch (err) {
       console.error("Failed to fetch courses:", err);

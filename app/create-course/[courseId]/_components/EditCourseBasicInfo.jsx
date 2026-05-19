@@ -12,10 +12,8 @@ import { HiPencilSquare } from 'react-icons/hi2'
 import { Input } from '../../../../Components/ui/input'
 import { Textarea } from '../../../../Components/ui/textarea'
 import { Button } from '../../../../Components/ui/button'
-import { courseList } from '../../../../configs/schema'
-  import db from '../../../../configs/db'
    import _ from 'lodash'
-   import { eq } from 'drizzle-orm'
+import { updateCourseBasicInfoById } from '../../../actions/courseActions'
 
 
 function EditCourseBasicInfo({course, refreshData}) {
@@ -46,10 +44,7 @@ const onUpdateHandler = async () => {
     updatedCourse.courseOutput.Course.Description = Description;
 
     // Update the database with the modified clone
-    const result = await db.update(courseList)
-        .set({ courseOutput: updatedCourse.courseOutput })
-        .where(eq(courseList.id, course.id))
-        .returning({ id: courseList.id });
+    await updateCourseBasicInfoById(course.id, Name, Description);
 
     refreshData(true)
 };

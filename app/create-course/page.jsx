@@ -8,10 +8,9 @@ import SelectOption from './_components/SelectOption'
 import { UserInputContext } from '../_context/UserInputContext'
 import { GenerateCourseLayout_Ai } from '../../configs/AiModel'
 import LoadingDialog from './_components/LoadingDialog'
-import { courseList } from '../../configs/schema'
 import uuid4 from 'uuid4'
 import { useUser } from '@clerk/nextjs'
-import db from '../../configs/db'
+import { createCourseRecord } from '../actions/courseActions'
 import { useRouter } from 'next/navigation'
 
 
@@ -80,7 +79,7 @@ const SaveCourseLayoutInDb = async (courseLayout) => {
     setLoading(true);
     
     try {
-        const result = await db.insert(courseList).values({
+    await createCourseRecord({
             courseId: id,
             name: userCourseInput?.topic,
             level: userCourseInput?.level,
@@ -91,7 +90,7 @@ const SaveCourseLayoutInDb = async (courseLayout) => {
             userProfileImage: user?.imageUrl
         });
 
-        console.log("Data inserted:", result);
+    console.log("Data inserted:", id);
        
     } catch (error) {
         console.error("Error inserting data:", error);

@@ -1,13 +1,11 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import db from '../../../../configs/db'
-import { Chapters, courseList } from '../../../../configs/schema'
-import { and, eq } from 'drizzle-orm'
 import { useParams, useRouter } from 'next/navigation'
 import ChapterListCard from './_components/ChapterListCard'
 import ChpaterContent from './_components/ChpaterContent'
-import { Menu, X } from 'lucide-react'
+import { ArrowLeft, Menu, X } from 'lucide-react'
 import { TracingBeam } from '../../../../Components/ui/tracing-beam'
+import { getChapterByCourseIdAndChapterId, getCourseByCourseId } from '../../../actions/courseActions'
 
 function CourseStart() {
   const params = useParams();
@@ -23,18 +21,13 @@ function CourseStart() {
   }, []);
 
   const GetCourse = async () => {
-    const result = await db.select().from(courseList)
-      .where(eq(courseList?.courseId, params?.courseId));
-    setCourse(result[0]);
+    const result = await getCourseByCourseId(params?.courseId);
+    setCourse(result);
   }
 
   const GetSelectedChapterContent = async (chapterId) => {
-    const result = await db.select().from(Chapters)
-      .where(and(
-        eq(Chapters.chapterId, chapterId),
-        eq(Chapters.courseId, course?.courseId)
-      ));
-    setChapterContent(result[0]);
+    const result = await getChapterByCourseIdAndChapterId(course?.courseId, chapterId);
+    setChapterContent(result);
   }
 
   const chapters = course?.courseOutput?.Course?.Chapters;
@@ -47,8 +40,15 @@ function CourseStart() {
 
       <div className='relative z-10 flex flex-col min-h-screen'>
 
-        {/* Top Course Title */}
-        
+        <div className="flex items-center justify-end gap-3 px-4 pt-4 lg:px-6">
+          <button
+            onClick={() => router.push('/dashboard')}
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Dashboard
+          </button>
+        </div>
 
         <div className='flex flex-1'>
 

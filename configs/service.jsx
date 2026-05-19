@@ -7,9 +7,8 @@ const getVideos = async (query) => {
         part: 'snippet',
         q: query,
         maxResults: 2, 
-        type:'video',                        // ✅ Use plural form
-        // key: process.env?.NEXT_PUBLIC_YOUTUBE_API_KEY   // ✅ Lowercase 'key'
-        key:'AIzaSyBrHlz5zz_ntA1kU2NDnpEgqF7TIU7QPPM'
+        type:'video',
+        key: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY
 
     };
 

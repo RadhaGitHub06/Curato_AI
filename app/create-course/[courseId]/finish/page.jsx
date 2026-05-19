@@ -4,11 +4,9 @@
 import { useUser } from '@clerk/nextjs';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import db from '../../../../configs/db';
-import { courseList } from '../../../../configs/schema';
-import { and, eq } from 'drizzle-orm';
 import CourseBasicInfo from '../_components/CourseBasicInfo';
 import { HiOutlineClipboardDocumentCheck } from 'react-icons/hi2';
+import { getCourseByCourseId } from '../../../actions/courseActions';
 
 function FinishScreen() {  
     const { user } = useUser();
@@ -25,17 +23,9 @@ function FinishScreen() {
 
     const GetCourse = async () => {
         try {
-            const result = await db
-                .select()
-                .from(courseList)
-                .where(
-                    and(
-                        eq(courseList.courseId, params?.courseId),
-                        eq(courseList.createdBy, user?.primaryEmailAddress?.emailAddress)
-                    )
-                );
-            setCourse(result[0]);
-            console.log("Course Data:", result[0]);
+            const result = await getCourseByCourseId(params?.courseId, user?.primaryEmailAddress?.emailAddress);
+            setCourse(result);
+            console.log("Course Data:", result);
         } catch (error) {
             console.error("Error fetching course:", error);
         }

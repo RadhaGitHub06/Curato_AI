@@ -11,6 +11,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'img.clerk.com', // 👈 Add this
       },
+      {
+        protocol: 'https',
+        hostname: 'image.pollinations.ai',
+      },
     ],
   },
 };

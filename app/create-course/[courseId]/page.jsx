@@ -3,10 +3,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation"; // ✅ Use the correct router import
-import { Chapters, courseList } from "../../../configs/schema";
 import { useUser } from "@clerk/nextjs";
-import db from "../../../configs/db"; // ✅ Import the `db` instance
-import { and, eq } from "drizzle-orm"; // ✅ Import Drizzle conditions
 import CourseBasicInfo from "./_components/CourseBasicInfo";
 import CourseDetail from "./_components/CourseDetail";
 import ChapterList from "./_components/ChapterList";
@@ -14,6 +11,27 @@ import { Button } from "../../../Components/ui/button";
 import { GenerateChapterContent_Ai } from "../../../configs/AiModel";
 import LoadingDialog from "../_components/LoadingDialog";
 import service from "../../../configs/service";
+import { getCourseByCourseId, insertChapterRecord, publishCourseByCourseId } from "../../actions/courseActions";
+
+function parseModelJson(responseText) {
+  if (!responseText) {
+    throw new Error("Empty model response");
+  }
+
+  const trimmedText = String(responseText).trim();
+
+  try {
+    return JSON.parse(trimmedText);
+  } catch (error) {
+    const match = trimmedText.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
+
+    if (!match) {
+      throw error;
+    }
+
+    return JSON.parse(match[0]);
+  }
+}
 
 function CourseLayout() {
   const { user } = useUser();
@@ -30,17 +48,9 @@ function CourseLayout() {
 
   const GetCourse = async () => {
     try {
-      const result = await db
-        .select()
-        .from(courseList)
-        .where(
-          and(
-            eq(courseList.courseId, params?.courseId),
-            eq(courseList.createdBy, user?.primaryEmailAddress?.emailAddress)
-          )
-        );
-      setCourse(result[0]);
-      console.log("Course Data:", result[0]);
+      const result = await getCourseByCourseId(params?.courseId, user?.primaryEmailAddress?.emailAddress);
+      setCourse(result);
+      console.log("Course Data:", result);
     } catch (error) {
       console.error("Error fetching course:", error);
     }
@@ -73,7 +83,7 @@ function CourseLayout() {
 
             // ✅ Parse JSON with error handling
             try {
-              content = JSON.parse(responseText);
+              content = parseModelJson(responseText);
             } catch (error) {
               console.error(`Invalid JSON response for Chapter ${index + 1}:`, error);
               content = { title: "Error", explanation: "Invalid content format" };
@@ -88,11 +98,11 @@ function CourseLayout() {
             }
 
             // ✅ Save chapter content + video URL to DB
-            await db.insert(Chapters).values({
+            await insertChapterRecord({
               chapterId: index,
               courseId: course?.courseId,
               content: content,
-              VideoId: videoId,
+              videoId,
             });
 
           } catch (error) {
@@ -102,9 +112,7 @@ function CourseLayout() {
       });
 
       await Promise.all(promises);
-await db.update(courseList).set({
-  publish:true
-})
+await publishCourseByCourseId(course?.courseId)
      
       // ✅ Navigate after all chapters are generated
       router.replace(`/create-course/${course?.courseId}/finish`);
@@ -125,7 +133,7 @@ await db.update(courseList).set({
       <CourseBasicInfo course={course} edit={true} refreshData={() => GetCourse()} />
       <Button
   onClick={GenerateChapterContent}
-  className="my-10 px-6 py-3 bg-white hover:bg-[#618ebe] text-white text-black text-xl font-semibold rounded-2xl shadow-md hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out border border-gray-300"
+  className="my-10 px-6 py-3 bg-white text-black text-xl font-semibold rounded-2xl shadow-md hover:bg-[#618ebe] hover:text-white hover:scale-105 transition-all duration-300 ease-in-out border border-gray-300"
 >
   Generate Course Content
 </Button>
